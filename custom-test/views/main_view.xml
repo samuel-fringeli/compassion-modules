@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_form_todo_task" model="ir.ui.view">
+            <field name="name">Liste de tâches</field>
+            <field name="model">custom.test</field>
+            <field name="arch" type="xml">
+                <form>
+                   <header>
+                       <button name="do_toggle_done" type="object"
+                             string="Toggle Done" class="oe_highlight" />
+                       <button name="do_clear_done" type="object"
+                             string="Clear All Done" />
+                   </header>
+                   <sheet>
+                       <group name="group_top">
+                       <group name="group_left">
+                           <field name="name"/>
+                       </group>
+                       <group name="group_right">
+                           <field name="is_done"/>
+                           <field name="active" readonly="1" />
+                       </group>
+                     </group>
+                   </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_filter_todo_task" model="ir.ui.view">
+            <field name="name">To-do Task Filter</field>
+            <field name="model">custom.test</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <filter string="Not Done"
+                            domain="[('is_done','=',False)]"/>
+                    <filter string="Done"
+                            domain="[('is_done','!=',False)]"/>
+                </search>
+            </field>
+        </record>
+        <act_window id="action_custom_test" name="Custom test" res_model="custom.test" view_mode="tree,form"/>
+        <menuitem id="menu_custom_test" name="Custom test" parent="hr_attendance.menu_hr_attendance_root" sequence="100" action="action_custom_test"/>
+    </data>
+</odoo>
